@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temple Run | Adventure Awaits</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="js/three.min.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(
+                135deg,
+                #1a1a1a 0%,
+                #2d2d2d 50%,
+                #1a1a1a 100%
+            );
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Overlay Pattern */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 1;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-title {
+            font-family: 'Cinzel', serif;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6); }
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 4px;
+        }
+
+        .score-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+        }
+
+        .score-label {
+            color: #fff;
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        #score {
+            color: #ffd700;
+            font-size: 32px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .start-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 200;
+            transition: all 0.5s ease;
+        }
+
+        .start-box.hidden {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.9);
+            pointer-events: none;
+        }
+
+        .start-box h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .start-text {
+            color: #666;
+            font-size: 18px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.98); }
+        }
+
+        #world {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 50;
+        }
+
+        /* Temple Decorative Elements */
+        .temple-pillar {
+            position: fixed;
+            width: 100px;
+            height: 100vh;
+            background: linear-gradient(90deg, 
+                rgba(255,215,0,0.1) 0%,
+                rgba(255,215,0,0.2) 50%,
+                rgba(255,215,0,0.1) 100%);
+            z-index: 2;
+        }
+
+        .pillar-left { left: 10%; }
+        .pillar-right { right: 10%; }
+    </style>
+</head>
+<body>
+    <div class="temple-pillar pillar-left"></div>
+    <div class="temple-pillar pillar-right"></div>
+
+    <header class="header">
+        <div class="game-title">
+            <div class="title">TEMPLE RUN</div>
+        </div>
+        <div class="score-container">
+            <div class="score-label">Score</div>
+            <div id="score">0</div>
+        </div>
+    </header>
+
+    <div class="start-box" id="startBox">
+        <h2>Welcome to Temple Run</h2>
+        <div class="start-text">Press any button to begin your adventure</div>
+    </div>
+
+    <div id="world"></div>
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+            document.getElementById('startBox').classList.add('hidden');
+        });
+
+        document.addEventListener('click', function(event) {
+            document.getElementById('startBox').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

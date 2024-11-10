@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load 3D GLB</title>
+    <style>
+        body { 
+            margin: 0; 
+            position: relative; 
+            background-image: url('../img/2.png'); /* Set background image */
+            background-size: cover; /* Cover the entire body */
+            background-position: center; /* Center the background image */
+            overflow: hidden; /* Hide overflow to prevent scroll bars */
+        }
+        canvas { 
+            display: block; 
+            background-color: transparent; /* Make canvas transparent */
+        }
+       
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .button-container {
+            position: absolute;
+            bottom: 20px; /* Position from the bottom */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Adjust for centering */
+            display: flex; /* Use flexbox for button alignment */
+            gap: 10px; /* Space between buttons */
+        }
+        .button {
+            background-color: #FF5722; /* Button color */
+            color: white; /* Text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition on hover */
+        }
+        .button:hover {
+            background-color: #FF8A65; /* Lighter color on hover */
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="button-container">
+        <button class="button" id="prevBtn">Previous</button>
+        <button class="button" id="nextBtn">Next</button>
+        <select id="modelSelect" class="button">
+            <option value="0">Cow</option>
+            <option value="1">Rabbit</option>
+            <option value="2">Chicken</option>
+            <option value="3">Pig</option>
+            <option value="4">Lion</option>
+        </select>
+        <button class="button" id="selectBtn">Select</button>
+        <button class="button" id="playBtn">Play</button>
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="script_character.js"></script>
+
+</body>
+</html>
