@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEMPLE ADVENTURE</title>
+    <title>Lari ada PKI</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 
         * {
             margin: 0;
@@ -15,8 +15,8 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(rgba(219, 88, 82, 0.7), rgba(138, 214, 214, 0.7)),
-                        url('img/templerun.png');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(20, 20, 20, 0.9)),
+                        url('/api/placeholder/1920/1080');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -24,62 +24,98 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-family: 'Permanent Marker', cursive;
-        }
-
-        .game-title {
-            color: #fff;
-            font-size: 4.5rem;
-            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-            margin-bottom: 2rem;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #db5852;
-            }
-            to {
-                text-shadow: 0 0 20px #fff, 0 0 30px #8ad6d6, 0 0 40px #8ad6d6;
-            }
-        }
-
-        .play-container {
-            position: relative;
-            margin-top: 2rem;
-        }
-
-        .play-button {
-            padding: 1.2rem 3.5rem;
-            font-size: 2rem;
-            font-family: 'Permanent Marker', cursive;
-            background: linear-gradient(45deg, #db5852, #8ad6d6);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-family: 'Black Ops One', cursive;
             position: relative;
             overflow: hidden;
-            z-index: 1;
         }
 
-        .play-button::before {
+        /* Smoke Effect */
+        body::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #8ad6d6, #db5852);
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    rgba(50, 50, 50, 0.3) 50%,
+                    transparent 100%
+                );
+            animation: smoke 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes smoke {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .game-title {
+            color: #c41e3a;
+            font-size: 4.5rem;
+            text-shadow: 0 0 10px rgba(196, 30, 58, 0.7),
+                         0 0 20px rgba(196, 30, 58, 0.5);
+            margin-bottom: 2rem;
+            animation: warGlow 2s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes warGlow {
+            from {
+                text-shadow: 0 0 10px rgba(196, 30, 58, 0.7),
+                            0 0 20px rgba(196, 30, 58, 0.5);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(196, 30, 58, 0.9),
+                            0 0 30px rgba(196, 30, 58, 0.7),
+                            0 0 45px rgba(196, 30, 58, 0.5);
+            }
+        }
+
+        .play-container {
+            position: relative;
+            margin-top: 2rem;
+            z-index: 2;
+        }
+
+        .play-button {
+            padding: 1.2rem 3.5rem;
+            font-size: 2rem;
+            font-family: 'Black Ops One', cursive;
+            background: linear-gradient(45deg, #1a1a1a, #333);
+            color: #c41e3a;
+            border: 2px solid #c41e3a;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, 
+                rgba(196, 30, 58, 0.4) 0%,
+                transparent 70%);
+            transform: translate(-50%, -50%);
             opacity: 0;
-            z-index: -1;
             transition: opacity 0.3s ease;
         }
 
         .play-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 20px rgba(196, 30, 58, 0.5);
         }
 
         .play-button:hover::before {
@@ -90,47 +126,67 @@
             transform: translateY(2px);
         }
 
-        .torch {
+        /* Searchlight Effect */
+        .searchlight {
             position: fixed;
-            width: 100px;
-            height: 150px;
-            background: radial-gradient(circle at 50% 0,
-                rgba(219, 88, 82, 0.4),
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 50% 50%,
+                rgba(255, 255, 255, 0.1),
                 transparent 70%);
-            animation: flicker 0.5s infinite alternate;
+            animation: searchlight 8s infinite linear;
+            pointer-events: none;
         }
 
-        .torch-left {
-            left: 10%;
+        .searchlight-left {
+            left: -100px;
             top: 20%;
-            background: radial-gradient(circle at 50% 0,
-                rgba(219, 88, 82, 0.4),
-                transparent 70%);
         }
 
-        .torch-right {
-            right: 10%;
+        .searchlight-right {
+            right: -100px;
             top: 20%;
-            background: radial-gradient(circle at 50% 0,
-                rgba(138, 214, 214, 0.4),
-                transparent 70%);
         }
 
-        @keyframes flicker {
-            0% { opacity: 0.8; }
-            100% { opacity: 1; }
+        @keyframes searchlight {
+            0% { transform: rotate(0deg) translateX(100px); }
+            100% { transform: rotate(360deg) translateX(100px); }
         }
+
+        /* Bullet Holes */
+        .bullet-hole {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at center,
+                #000 0%,
+                transparent 70%);
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        .bullet-hole:nth-child(1) { top: 10%; left: 15%; }
+        .bullet-hole:nth-child(2) { top: 25%; right: 20%; }
+        .bullet-hole:nth-child(3) { bottom: 30%; left: 25%; }
+        .bullet-hole:nth-child(4) { bottom: 15%; right: 30%; }
     </style>
 </head>
 <body>
-    <div class="torch torch-left"></div>
-    <div class="torch torch-right"></div>
+    <!-- Bullet Holes -->
+    <div class="bullet-hole"></div>
+    <div class="bullet-hole"></div>
+    <div class="bullet-hole"></div>
+    <div class="bullet-hole"></div>
+
+    <!-- Searchlights -->
+    <div class="searchlight searchlight-left"></div>
+    <div class="searchlight searchlight-right"></div>
     
-    <h1 class="game-title">TEMPLE ADVENTURE</h1>
+    <h1 class="game-title">Lari ada PKI</h1>
     
     <div class="play-container">
         <button class="play-button" onclick="window.location.href='game/index.html'">
-            PLAY NOW
+            DEPLOY NOW
         </button>
     </div>
 </body>
